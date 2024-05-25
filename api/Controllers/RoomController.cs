@@ -34,10 +34,11 @@ namespace api.Controllers
         }
 
         [HttpPost]
-        async Task<IActionResult> Create([FromBody] CreateRoomDto dto)
+        public async Task<IActionResult> Create([FromBody] CreateRoomDto dto)
         {
-            await roomRepo.CreateAsync(dto);
-            return Ok();
+            var room = dto.ToRoomFromCreateRoomDto();
+            await roomRepo.CreateAsync(room);
+            return CreatedAtAction(nameof(GetById), new { id = room.Id });
         }
 
 

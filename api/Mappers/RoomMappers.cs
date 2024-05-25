@@ -26,21 +26,34 @@ namespace api.Mappers
                         Double = room.BedsDouble,
                         Single = room.BedsSingle
                     },
-                    Options = []
+                    Options = new RoomDto.RoomConditions.RoomOptions
+                    {
+                        HasSafe = room.HasSafe,
+                        HasConditioner = room.HasConditioner,
+                        HasShower = room.HasShower,
+                        HasTub = room.HasTub,
+                    }
 
                 }
             };
-            if (room.HasSafe) roomDto.Conditions.Options.Add("has-safe");
-            if (room.HasConditioner) roomDto.Conditions.Options.Add("has-conditioner");
-            if (room.HasTub) roomDto.Conditions.Options.Add("has-tub");
-            if (room.HasShower) roomDto.Conditions.Options.Add("has-shower");
             return roomDto;
         }
 
         public static Room ToRoomFromCreateRoomDto(this CreateRoomDto dto)
         {
-
-
+            var room = new Room
+            {
+                Title = dto.Title,
+                Price = dto.Price,
+                MaxGuests = dto.Conditions.MaxGuests,
+                BedsSingle = dto.Conditions.Beds.Single,
+                BedsDouble = dto.Conditions.Beds.Double,
+                HasSafe = dto.Conditions.Options.HasSafe,
+                HasConditioner = dto.Conditions.Options.HasConditioner,
+                HasShower = dto.Conditions.Options.HasShower,
+                HasTub = dto.Conditions.Options.HasTub
+            };
+            return room;
         }
     }
 }

@@ -13,6 +13,11 @@ namespace api.Repositories
 {
     public class RoomRepo(ApplicationDbContext db) : IRoomRepo
     {
+        public async Task<bool> ExistsAsync(int id)
+        {
+            return await db.Rooms.AnyAsync(r => r.Id == id);
+        }
+
         public async Task<Room?> GetByIdAsync(int id)
         {
             return await db.Rooms.FindAsync(id);
@@ -23,20 +28,23 @@ namespace api.Repositories
             return await db.Rooms.ToListAsync();
         }
 
-        public Task CreateAsync(CreateRoomDto dto)
+        public async Task<Room> CreateAsync(Room room)
         {
-            throw new NotImplementedException();
-
-
+            await db.AddAsync(room);
+            await db.SaveChangesAsync();
+            return room;
         }
 
-        public async Task DeleteAsync(int id)
+        public async Task<Room?> DeleteAsync(int id)
         {
-            var room = await db.Rooms.FindAsync(id);
-            if (room == null) return;
+            var room = await GetByIdAsync(id);
+            if (room == null) return null;
 
             db.Rooms.Remove(room);
             await db.SaveChangesAsync();
+            return room;
         }
+
+
     }
 }

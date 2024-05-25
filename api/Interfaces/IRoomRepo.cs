@@ -9,9 +9,10 @@ namespace api.Interfaces
 {
     public interface IRoomRepo
     {
+        public Task<bool> ExistsAsync(int id);
         public Task<Room?> GetByIdAsync(int id);
         public Task<List<Room>> GetAllAsync();
-        public Task CreateAsync(CreateRoomDto dto);
-        public Task DeleteAsync(int id);
+        public Task<Room> CreateAsync(Room room);
+        public Task<Room?> DeleteAsync(int id);
     }
 }

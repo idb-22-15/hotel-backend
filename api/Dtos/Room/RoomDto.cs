@@ -30,8 +30,10 @@ namespace api.Dtos.Room
                 public required int Single { get; set; }
             }
 
+
+            public required RoomOptions Options;
             [Serializable]
-            public class Options
+            public class RoomOptions
             {
                 public bool HasSafe;
                 public bool HasConditioner;
