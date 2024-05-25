@@ -1,0 +1,43 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace api.Dtos.Room
+{
+    [Serializable]
+    public class RoomDto
+
+    {
+        public required int Id { get; set; }
+        public required string Title { get; set; }
+        public required decimal Price { get; set; }
+
+        public required RoomConditions Conditions;
+
+        [Serializable]
+        public class RoomConditions
+        {
+            public required int MaxGuests { get; set; }
+            public required decimal Square { get; set; }
+
+            public required RoomBeds Beds;
+
+            [Serializable]
+            public class RoomBeds
+            {
+                public required int Double { get; set; }
+                public required int Single { get; set; }
+            }
+
+            [Serializable]
+            public class Options
+            {
+                public bool HasSafe;
+                public bool HasConditioner;
+                public bool HasShower;
+                public bool HasTub;
+            }
+        }
+    }
+}

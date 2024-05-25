@@ -1,5 +1,7 @@
 using api.Controllers;
 using api.Data;
+using api.Interfaces;
+using api.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,6 +14,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<ApplicationDbContext>();
+builder.Services.AddScoped<IRoomRepo, RoomRepo>();
 
 var app = builder.Build();
 
@@ -22,7 +25,6 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
 app.MapControllers();
 
 app.Run();

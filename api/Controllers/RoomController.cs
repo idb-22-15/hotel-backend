@@ -2,55 +2,50 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using api.Controllers;
 using api.Data;
+using api.Dtos.Room;
+using api.Interfaces;
+using api.Mappers;
 using api.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace api.Controllers
 {
     [Route("/api/rooms")]
     [ApiController]
-    public class RoomController(ApplicationDbContext db) : ControllerBase
+    public class RoomController(IRoomRepo roomRepo) : ControllerBase
     {
-        private readonly ApplicationDbContext db = db;
-
-
-        [HttpGet]
-        public IActionResult GetAll()
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById([FromRoute] int id)
         {
-            var rooms = db.Rooms.ToList();
-            return Ok(rooms);
+            var room = await roomRepo.GetByIdAsync(id);
+            if (room == null) return NotFound();
+            return Ok(room.ToRoomDto());
+
         }
 
-
-        [HttpGet("{id}")]
-        public IActionResult GetById([FromRoute] int id)
+        [HttpGet]
+        public async Task<IActionResult> GetAll()
         {
-            var room = db.Rooms.Find(id);
-            if (room == null) return NotFound();
-            return Ok(room);
-
+            var rooms = await roomRepo.GetAllAsync();
+            return Ok(rooms.Select(r => r.ToRoomDto()));
         }
 
         [HttpPost]
-        public IActionResult Create()
+        async Task<IActionResult> Create([FromBody] CreateRoomDto dto)
         {
-            var room = new Room
-            {
-                Title = "Номер №2",
-                Price = 4000,
-                BedsSingle = 1,
-                BedsDouble = 2,
-                HasConditioner = true,
-                HasSafe = true,
-                HasTub = true,
-                MaxGuests = 4,
-                Square = 40
-            };
-            db.Rooms.Add(room);
-            return Ok(room);
+            await roomRepo.CreateAsync(dto);
+            return Ok();
         }
 
-    }
 
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete([FromRoute] int id)
+        {
+            await roomRepo.DeleteAsync(id);
+            return NoContent();
+        }
+    }
 }
