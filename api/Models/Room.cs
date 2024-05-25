@@ -21,6 +21,6 @@ namespace api.Models
         public bool HasShower { get; set; }
 
         public required List<Image> Images { get; set; }
-        public required List<BookedDateRange> BookedDateRanges { get; set; }
+        public required List<Reservation> Reservations { get; set; }
     }
 }

@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using api.Data;
 using api.Interfaces;
 using api.Models;
@@ -18,12 +14,12 @@ namespace api.Repositories
 
         public async Task<Room?> GetByIdAsync(int id)
         {
-            return await db.Rooms.Include(r => r.Images).Include(r => r.BookedDateRanges).FirstOrDefaultAsync(r => r.Id == id);
+            return await db.Rooms.Include(r => r.Images).Include(r => r.Reservations).FirstOrDefaultAsync(r => r.Id == id);
         }
 
         public async Task<List<Room>> GetAllAsync()
         {
-            return await db.Rooms.Include(r => r.Images).Include(r => r.BookedDateRanges).ToListAsync();
+            return await db.Rooms.Include(r => r.Images).Include(r => r.Reservations).ToListAsync();
         }
 
         public async Task<Room> CreateAsync(Room room)

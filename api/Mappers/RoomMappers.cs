@@ -13,16 +13,16 @@ namespace api.Mappers
                 Id = room.Id,
                 Price = room.Price,
                 Title = room.Title,
-                Conditions = new RoomDto.RoomConditions
+                Conditions = new RoomDtoConditions
                 {
                     MaxGuests = room.MaxGuests,
                     Square = room.Square,
-                    Beds = new RoomDto.RoomConditions.RoomBeds
+                    Beds = new RoomDtoBeds
                     {
                         Double = room.BedsDouble,
                         Single = room.BedsSingle
                     },
-                    Options = new RoomDto.RoomConditions.RoomOptions
+                    Options = new RoomDtoOptions
                     {
                         HasSafe = room.HasSafe,
                         HasConditioner = room.HasConditioner,
@@ -30,7 +30,7 @@ namespace api.Mappers
                         HasTub = room.HasTub,
                     }
                 },
-                BookedDateRanges = room.BookedDateRanges == null ? [] : room.BookedDateRanges.Select(r => r.ToBookedDateRangeDto()).ToList(),
+                BookedDateRanges = room.Reservations == null ? [] : room.Reservations.Select(r => r.ToBookedDateRangeDto()).ToList(),
                 Images = room.Images == null ? [] : room.Images.Select(img => img.ToImageDto()).ToList(),
             };
             return roomDto;
@@ -50,7 +50,7 @@ namespace api.Mappers
                 HasShower = dto.Conditions.Options.HasShower,
                 HasTub = dto.Conditions.Options.HasTub,
                 Images = [],
-                BookedDateRanges = []
+                Reservations = []
             };
             return room;
         }
