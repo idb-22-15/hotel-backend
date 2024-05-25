@@ -1,15 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using api.Controllers;
-using api.Data;
 using api.Dtos.Room;
 using api.Interfaces;
 using api.Mappers;
-using api.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace api.Controllers
 {
@@ -38,7 +30,7 @@ namespace api.Controllers
         {
             var room = dto.ToRoomFromCreateRoomDto();
             await roomRepo.CreateAsync(room);
-            return CreatedAtAction(nameof(GetById), new { id = room.Id });
+            return CreatedAtAction(nameof(GetById), new { id = room.Id }, room.ToRoomDto());
         }
 
 

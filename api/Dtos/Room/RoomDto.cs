@@ -1,7 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using api.Dtos.BookedDateRange;
+using api.Dtos.Image;
 
 namespace api.Dtos.Room
 {
@@ -14,6 +12,9 @@ namespace api.Dtos.Room
         public required decimal Price { get; set; }
 
         public required RoomConditions Conditions;
+
+        public required List<BookedDateRangeDto> BookedDateRanges;
+        public required List<ImageDto> Images;
 
         [Serializable]
         public class RoomConditions

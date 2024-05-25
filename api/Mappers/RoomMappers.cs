@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using api.Dtos.Room;
 using api.Models;
 
@@ -33,8 +29,9 @@ namespace api.Mappers
                         HasShower = room.HasShower,
                         HasTub = room.HasTub,
                     }
-
-                }
+                },
+                BookedDateRanges = room.BookedDateRanges.Select(r => r.ToBookedDateRangeDto()).ToList(),
+                Images = room.Images.Select(img => img.ToImageDto()).ToList(),
             };
             return roomDto;
         }
@@ -51,7 +48,9 @@ namespace api.Mappers
                 HasSafe = dto.Conditions.Options.HasSafe,
                 HasConditioner = dto.Conditions.Options.HasConditioner,
                 HasShower = dto.Conditions.Options.HasShower,
-                HasTub = dto.Conditions.Options.HasTub
+                HasTub = dto.Conditions.Options.HasTub,
+                Images = [],
+                BookedDateRanges = []
             };
             return room;
         }
