@@ -20,7 +20,7 @@ namespace api.Data
         }
 
         public DbSet<Room> Rooms { get; set; }
-        public DbSet<Image> Images { get; set; }
+        public DbSet<Room> Images { get; set; }
         public DbSet<BookedDateRange> BookedDateRanges { get; set; }
 
     }

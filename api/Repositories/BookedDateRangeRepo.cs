@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using api.Data;
-using api.Dtos.BookedDateRange;
+using api.Dtos.Room;
 using api.Interfaces;
 using api.Models;
+using api.Mappers;
 using Microsoft.EntityFrameworkCore;
+using api.Dtos.BookedDateRange;
 
 namespace api.Repositories
 {
@@ -14,37 +16,35 @@ namespace api.Repositories
     {
         public async Task<bool> ExistsAsync(int id)
         {
-            return await db.BookedDateRanges.AnyAsync(b => b.Id == id);
+
+            return await db.BookedDateRanges.AnyAsync(r => r.Id == id);
         }
 
-        public Task CreateAsync(CreateBookedDateRangeDto dto)
+        public async Task<BookedDateRange?> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await db.BookedDateRanges.FindAsync(id);
         }
 
-        public Task DeleteAsync(int id)
+        public async Task<List<BookedDateRange>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return await db.BookedDateRanges.ToListAsync();
         }
 
-        public Task<List<BookedDateRange>> GetAllAsync()
+        public async Task<BookedDateRange> CreateAsync(BookedDateRange range)
         {
-            throw new NotImplementedException();
+            await db.AddAsync(range);
+            await db.SaveChangesAsync();
+            return range;
         }
 
-        public Task<BookedDateRange?> GetByIdAsync(int id)
+        public async Task<BookedDateRange?> DeleteAsync(int id)
         {
-            throw new NotImplementedException();
-        }
+            var range = await GetByIdAsync(id);
+            if (range == null) return null;
 
-        Task<BookedDateRange> IBookedDateRangeRepo.CreateAsync(CreateBookedDateRangeDto dto)
-        {
-            throw new NotImplementedException();
-        }
-
-        Task<BookedDateRange?> IBookedDateRangeRepo.DeleteAsync(int id)
-        {
-            throw new NotImplementedException();
+            db.BookedDateRanges.Remove(range);
+            await db.SaveChangesAsync();
+            return range;
         }
     }
 }

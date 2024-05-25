@@ -14,7 +14,7 @@ namespace api.Models
         public int MaxGuests { get; set; }
         public int BedsDouble { get; set; }
         public int BedsSingle { get; set; }
-        public List<Image> Images { get; set; } = new List<Image>();
+        public List<Room> Images { get; set; } = new List<Room>();
 
         public bool HasSafe { get; set; }
         public bool HasConditioner { get; set; }
