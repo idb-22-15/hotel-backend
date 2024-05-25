@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace api.Controllers
 {
     [ApiController]
-    [Route("/api/reservation")]
+    [Route("/api/reservations")]
 
     public class ReservationController(IReservationRepo repo) : ControllerBase
     {
@@ -16,7 +16,6 @@ namespace api.Controllers
             var model = await repo.GetByIdAsync(id);
             if (model == null) return NotFound();
             return Ok(model.ToDto());
-
         }
 
         [HttpGet]

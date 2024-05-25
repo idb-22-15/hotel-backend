@@ -7,7 +7,7 @@ namespace api.Interfaces
         public Task<bool> ExistsAsync(int id);
         public Task<Room?> GetByIdAsync(int id);
         public Task<List<Room>> GetAllAsync();
-        public Task<Room> CreateAsync(Room room);
+        public Task<Room> CreateAsync(Room model);
         public Task<Room?> DeleteAsync(int id);
     }
 }

@@ -22,21 +22,21 @@ namespace api.Repositories
             return await db.Rooms.Include(r => r.Images).Include(r => r.Reservations).ToListAsync();
         }
 
-        public async Task<Room> CreateAsync(Room room)
+        public async Task<Room> CreateAsync(Room model)
         {
-            await db.AddAsync(room);
+            await db.AddAsync(model);
             await db.SaveChangesAsync();
-            return room;
+            return model;
         }
 
         public async Task<Room?> DeleteAsync(int id)
         {
-            var room = await GetByIdAsync(id);
-            if (room == null) return null;
+            var model = await GetByIdAsync(id);
+            if (model == null) return null;
 
-            db.Rooms.Remove(room);
+            db.Rooms.Remove(model);
             await db.SaveChangesAsync();
-            return room;
+            return model;
         }
     }
 }

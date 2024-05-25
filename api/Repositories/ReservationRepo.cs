@@ -1,37 +1,42 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using api.Data;
 using api.Interfaces;
 using api.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace api.Repositories
 {
-    public class ReservationRepo : IReservationRepo
+    public class ReservationRepo(ApplicationDbContext db) : IReservationRepo
     {
-        public Task<Reservation> CreateAsync(Reservation reservation)
+        public async Task<bool> ExistsAsync(int id)
         {
-            throw new NotImplementedException();
+            return await db.Reservations.AnyAsync(r => r.Id == id);
         }
 
-        public Task<Reservation?> DeleteAsync(int id)
+        public async Task<Reservation?> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await db.Reservations.FirstOrDefaultAsync(r => r.Id == id);
         }
 
-        public Task<bool> ExistsAsync(int id)
+        public async Task<List<Reservation>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return await db.Reservations.Include(r => r.Booker).Include(r => r.Guests).ToListAsync();
         }
 
-        public Task<List<Reservation>> GetAllAsync()
+        public async Task<Reservation> CreateAsync(Reservation model)
         {
-            throw new NotImplementedException();
+            await db.Reservations.AddAsync(model);
+            await db.SaveChangesAsync();
+            return model;
         }
 
-        public Task<Reservation?> GetByIdAsync(int id)
+        public async Task<Reservation?> DeleteAsync(int id)
         {
-            throw new NotImplementedException();
+            var model = await GetByIdAsync(id);
+            if (model == null) return null;
+
+            db.Reservations.Remove(model);
+            await db.SaveChangesAsync();
+            return model;
         }
     }
 }

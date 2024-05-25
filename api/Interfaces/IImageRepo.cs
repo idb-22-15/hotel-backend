@@ -7,7 +7,7 @@ namespace api.Interfaces
         public Task<bool> ExistsAsync(int id);
         public Task<Image?> GetByIdAsync(int id);
         public Task<List<Image>> GetAllAsync();
-        public Task<Image> CreateAsync(Image image);
+        public Task<Image> CreateAsync(Image model);
         public Task<Image?> DeleteAsync(int id);
     }
 }

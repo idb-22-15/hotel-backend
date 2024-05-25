@@ -11,11 +11,8 @@ namespace api.Dtos.Room
         public required string Title { get; set; }
         public required decimal Price { get; set; }
         public required RoomDtoConditions Conditions;
-
         public required List<BookedDateRangeDto> BookedDateRanges;
         public required List<ImageDto> Images;
-
-
     }
 
     [Serializable]
@@ -26,7 +23,6 @@ namespace api.Dtos.Room
         public required decimal Square { get; set; }
         public required RoomDtoBeds Beds;
         public required RoomDtoOptions Options;
-
     }
 
     [Serializable]
