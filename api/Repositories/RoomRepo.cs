@@ -18,12 +18,12 @@ namespace api.Repositories
 
         public async Task<Room?> GetByIdAsync(int id)
         {
-            return await db.Rooms.FindAsync(id);
+            return await db.Rooms.Include(r => r.Images).Include(r => r.BookedDateRanges).FirstOrDefaultAsync(r => r.Id == id);
         }
 
         public async Task<List<Room>> GetAllAsync()
         {
-            return await db.Rooms.ToListAsync();
+            return await db.Rooms.Include(r => r.Images).Include(r => r.BookedDateRanges).ToListAsync();
         }
 
         public async Task<Room> CreateAsync(Room room)

@@ -30,8 +30,8 @@ namespace api.Mappers
                         HasTub = room.HasTub,
                     }
                 },
-                BookedDateRanges = room.BookedDateRanges.Select(r => r.ToBookedDateRangeDto()).ToList(),
-                Images = room.Images.Select(img => img.ToImageDto()).ToList(),
+                BookedDateRanges = room.BookedDateRanges == null ? [] : room.BookedDateRanges.Select(r => r.ToBookedDateRangeDto()).ToList(),
+                Images = room.Images == null ? [] : room.Images.Select(img => img.ToImageDto()).ToList(),
             };
             return roomDto;
         }
