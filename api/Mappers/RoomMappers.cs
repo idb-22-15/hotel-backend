@@ -5,7 +5,7 @@ namespace api.Mappers
 {
     public static class RoomMappers
     {
-        public static RoomDto ToRoomDto(this Room room)
+        public static RoomDto ToDto(this Room room)
         {
 
             var roomDto = new RoomDto
@@ -31,12 +31,12 @@ namespace api.Mappers
                     }
                 },
                 BookedDateRanges = room.Reservations == null ? [] : room.Reservations.Select(r => r.ToBookedDateRangeDto()).ToList(),
-                Images = room.Images == null ? [] : room.Images.Select(img => img.ToImageDto()).ToList(),
+                Images = room.Images == null ? [] : room.Images.Select(img => img.ToDto()).ToList(),
             };
             return roomDto;
         }
 
-        public static Room ToRoomFromCreateRoomDto(this CreateRoomDto dto)
+        public static Room ToModelFromCreateDto(this CreateRoomDto dto)
         {
             var room = new Room
             {

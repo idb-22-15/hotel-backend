@@ -19,6 +19,8 @@ builder.Services.AddControllers().AddNewtonsoftJson(options =>
 
 builder.Services.AddDbContext<ApplicationDbContext>();
 builder.Services.AddScoped<IRoomRepo, RoomRepo>();
+builder.Services.AddScoped<IReservationRepo, ReservationRepo>();
+
 
 var app = builder.Build();
 

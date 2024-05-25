@@ -1,4 +1,4 @@
-using api.Dtos.Room;
+using api.Dtos.Reservation;
 using api.Interfaces;
 using api.Mappers;
 using Microsoft.AspNetCore.Mvc;
@@ -6,8 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 namespace api.Controllers
 {
     [ApiController]
-    [Route("/api/rooms")]
-    public class RoomController(IRoomRepo repo) : ControllerBase
+    [Route("/api/reservation")]
+
+    public class ReservationController(IReservationRepo repo) : ControllerBase
     {
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById([FromRoute] int id)
@@ -26,7 +27,7 @@ namespace api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] CreateRoomDto dto)
+        public async Task<IActionResult> Create([FromBody] CreateReservationDto dto)
         {
             var model = dto.ToModelFromCreateDto();
             await repo.CreateAsync(model);

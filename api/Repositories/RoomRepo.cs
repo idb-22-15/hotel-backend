@@ -38,7 +38,5 @@ namespace api.Repositories
             await db.SaveChangesAsync();
             return room;
         }
-
-
     }
 }

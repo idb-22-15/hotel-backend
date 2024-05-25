@@ -6,6 +6,34 @@ namespace api.Mappers
 {
     public static class ReservationMapper
     {
+        public static ReservationDto ToDto(this Reservation reservation)
+        {
+            var dto = new ReservationDto
+            {
+                RoomId = reservation.RoomId,
+                CheckIn = reservation.CheckIn,
+                CheckOut = reservation.CheckOut,
+                Booker = new ReservationBookerDto
+                {
+                    Id = reservation.Booker.Id,
+                    Name = reservation.Booker.Name,
+                    LastName = reservation.Booker.LastName,
+                    MiddleName = reservation.Booker.MiddleName,
+                    Email = reservation.Booker.Email,
+                    Phone = reservation.Booker.Phone,
+                },
+                Guests = reservation.Guests.Select(guest => new ReservationGuestDto
+                {
+                    Id = guest.Id,
+                    Name = guest.Name,
+                    LastName = guest.LastName,
+                    MiddleName = guest.MiddleName,
+                    IsChild = guest.IsChild,
+                    Age = guest.Age,
+                }).ToList()
+            };
+            return dto;
+        }
         public static BookedDateRangeDto ToBookedDateRangeDto(this Reservation reservation)
         {
             var bookedDateRange = new BookedDateRangeDto
@@ -17,7 +45,7 @@ namespace api.Mappers
             return bookedDateRange;
         }
 
-        public static Reservation ToReservationFromCreateDto(this ReservationDto dto)
+        public static Reservation ToModelFromCreateDto(this CreateReservationDto dto)
         {
             var reservation = new Reservation
             {

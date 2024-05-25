@@ -5,7 +5,7 @@ namespace api.Mappers
 {
     public static class ImageMapper
     {
-        public static ImageDto ToImageDto(this Image image)
+        public static ImageDto ToDto(this Image image)
         {
             var dto = new ImageDto
             {

@@ -17,7 +17,7 @@ namespace api.Dtos.Reservation
     public class ReservationBookerDto
 
     {
-        public int ReservationId { get; set; }
+        public int Id { get; set; }
         public required string Name { get; set; }
         public required string LastName { get; set; }
         public string? MiddleName { get; set; }
@@ -27,7 +27,6 @@ namespace api.Dtos.Reservation
 
     public class ReservationGuestDto
     {
-        public int ReservationGuestId { get; set; }
         public int Id { get; set; }
         public required string Name { get; set; }
         public required string LastName { get; set; }
