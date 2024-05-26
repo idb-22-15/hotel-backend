@@ -25,7 +25,6 @@ namespace api.Dtos.Reservation
         public required string Name { get; set; }
         [MinLength(2)]
         public required string LastName { get; set; }
-        [MinLength(2)]
         public required string? MiddleName { get; set; }
         [EmailAddress()]
         public required string Email { get; set; }
@@ -40,7 +39,6 @@ namespace api.Dtos.Reservation
         public required string Name { get; set; }
         [MinLength(2)]
         public required string LastName { get; set; }
-        [MinLength(2)]
         public required string? MiddleName { get; set; }
         public required bool IsChild { get; set; }
         public required int? Age { get; set; }

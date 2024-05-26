@@ -30,18 +30,12 @@ namespace api.Repositories
         public async Task<Reservation?> CreateAsync(Reservation model)
         {
             var existingReservations = await GetByRoomIdAsync(model.RoomId);
-            Console.WriteLine(existingReservations);
             bool isIntersect = existingReservations.Any(r =>
                     (model.CheckIn >= r.CheckIn && model.CheckIn < r.CheckOut) ||
                     (model.CheckOut > r.CheckIn && model.CheckOut <= r.CheckOut)
             );
-            if (isIntersect)
-            {
-                Console.WriteLine(" intersect");
-                return null
-            ;
-            }
-            Console.WriteLine("not intersect");
+            if (isIntersect) return null;
+
             await db.Reservations.AddAsync(model);
             await db.SaveChangesAsync();
             return model;
