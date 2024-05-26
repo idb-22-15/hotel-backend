@@ -16,6 +16,16 @@ builder.Services.AddControllers().AddNewtonsoftJson(options =>
 {
     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
 });
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: "CorsPolicy",
+        builder =>
+        {
+            builder.AllowAnyOrigin()
+                   .AllowAnyMethod()
+                   .AllowAnyHeader();
+        });
+});
 
 builder.Services.AddDbContext<ApplicationDbContext>();
 builder.Services.AddScoped<IRoomRepo, RoomRepo>();
@@ -31,6 +41,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseCors("CorsPolicy");
 app.UseHttpsRedirection();
 app.MapControllers();
 

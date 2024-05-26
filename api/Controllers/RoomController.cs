@@ -15,6 +15,7 @@ namespace api.Controllers
         {
             var model = await repo.GetByIdAsync(id);
             if (model == null) return NotFound();
+            Console.WriteLine("get one");
             return Ok(model.ToDto());
 
         }
