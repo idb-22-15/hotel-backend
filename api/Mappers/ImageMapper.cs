@@ -10,7 +10,7 @@ namespace api.Mappers
             var dto = new ImageDto
             {
                 Id = image.Id,
-                Filename = image.Filename,
+                Url = image.Url,
                 RoomId = image.RoomId,
             };
             return dto;
