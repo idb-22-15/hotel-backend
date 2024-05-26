@@ -42,6 +42,7 @@ namespace api.Mappers
             {
                 Title = dto.Title,
                 Price = dto.Price,
+                Square = dto.Conditions.Square,
                 MaxGuests = dto.Conditions.MaxGuests,
                 BedsSingle = dto.Conditions.Beds.Single,
                 BedsDouble = dto.Conditions.Beds.Double,

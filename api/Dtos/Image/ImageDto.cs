@@ -7,8 +7,8 @@ namespace api.Dtos.Image
 {
     public class ImageDto
     {
-        public int Id { get; set; }
+        public required int Id { get; set; }
         public required string Filename { get; set; }
-        public int RoomId { get; set; }
+        public required int RoomId { get; set; }
     }
 }

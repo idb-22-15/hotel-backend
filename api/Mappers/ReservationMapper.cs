@@ -11,8 +11,11 @@ namespace api.Mappers
             var dto = new ReservationDto
             {
                 RoomId = reservation.RoomId,
+                Id = reservation.Id,
                 CheckIn = reservation.CheckIn,
                 CheckOut = reservation.CheckOut,
+                Wishes = reservation.Wishes,
+                IsPaid = reservation.IsPaid,
                 Booker = new ReservationBookerDto
                 {
                     Id = reservation.Booker.Id,
@@ -74,6 +77,8 @@ namespace api.Mappers
                 Name = guest.Name,
                 LastName = guest.LastName,
                 MiddleName = guest.MiddleName,
+                IsChild = guest.IsChild,
+                Age = guest.Age,
             }).ToList();
 
             reservation.Booker = booker;

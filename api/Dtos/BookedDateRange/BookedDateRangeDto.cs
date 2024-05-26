@@ -8,9 +8,8 @@ namespace api.Dtos.BookedDateRange
 {
     public class BookedDateRangeDto
     {
-        public int Id { get; set; }
-        public DateTime Start { get; set; }
-        public DateTime End { get; set; }
-        public int RoomId { get; set; }
+        public required int RoomId { get; set; }
+        public required DateTime Start { get; set; }
+        public required DateTime End { get; set; }
     }
 }

@@ -4,34 +4,35 @@ namespace api.Dtos.Reservation
 {
     public class ReservationDto
     {
-        public int RoomId { get; set; }
+        public required int RoomId { get; set; }
         public RoomDto? Room { get; set; }
-        public DateTime CheckIn { get; set; }
-        public DateTime CheckOut { get; set; }
+        public required int Id { get; set; }
+        public required DateTime CheckIn { get; set; }
+        public required DateTime CheckOut { get; set; }
         public required ReservationBookerDto Booker { get; set; }
         public required List<ReservationGuestDto> Guests { get; set; }
-        public string? Wishes { get; set; }
-        public bool IsPaid { get; set; }
+        public required string? Wishes { get; set; }
+        public required bool IsPaid { get; set; }
     }
 
     public class ReservationBookerDto
 
     {
-        public int Id { get; set; }
+        public required int Id { get; set; }
         public required string Name { get; set; }
         public required string LastName { get; set; }
-        public string? MiddleName { get; set; }
+        public required string? MiddleName { get; set; }
         public required string Email { get; set; }
         public required string Phone { get; set; }
     }
 
     public class ReservationGuestDto
     {
-        public int Id { get; set; }
+        public required int Id { get; set; }
         public required string Name { get; set; }
         public required string LastName { get; set; }
-        public string? MiddleName { get; set; }
-        public bool IsChild { get; set; }
-        public int? Age { get; set; }
+        public required string? MiddleName { get; set; }
+        public required bool IsChild { get; set; }
+        public required int? Age { get; set; }
     }
 }
