@@ -1,4 +1,5 @@
 using api.Data;
+using api.Env;
 using api.Interfaces;
 using api.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -19,6 +20,7 @@ builder.Services.AddControllers().AddNewtonsoftJson(options =>
 builder.Services.AddDbContext<ApplicationDbContext>();
 builder.Services.AddScoped<IRoomRepo, RoomRepo>();
 builder.Services.AddScoped<IReservationRepo, ReservationRepo>();
+builder.Services.AddSingleton<IEnv, Env>();
 builder.Services.AddTransient<IMailerRepo, MailerRepo>();
 
 var app = builder.Build();
