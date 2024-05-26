@@ -19,7 +19,7 @@ builder.Services.AddControllers().AddNewtonsoftJson(options =>
 builder.Services.AddDbContext<ApplicationDbContext>();
 builder.Services.AddScoped<IRoomRepo, RoomRepo>();
 builder.Services.AddScoped<IReservationRepo, ReservationRepo>();
-
+builder.Services.AddTransient<IMailerRepo, MailerRepo>();
 
 var app = builder.Build();
 

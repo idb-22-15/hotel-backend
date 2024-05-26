@@ -17,13 +17,31 @@ namespace api.Repositories
             return await db.Reservations.FirstOrDefaultAsync(r => r.Id == id);
         }
 
+        public async Task<List<Reservation>> GetByRoomIdAsync(int roomId)
+        {
+            return await db.Reservations.Where(r => r.RoomId == roomId).ToListAsync();
+        }
+
         public async Task<List<Reservation>> GetAllAsync()
         {
             return await db.Reservations.Include(r => r.Booker).Include(r => r.Guests).ToListAsync();
         }
 
-        public async Task<Reservation> CreateAsync(Reservation model)
+        public async Task<Reservation?> CreateAsync(Reservation model)
         {
+            var existingReservations = await GetByRoomIdAsync(model.RoomId);
+            Console.WriteLine(existingReservations);
+            bool isIntersect = existingReservations.Any(r =>
+                    (model.CheckIn >= r.CheckIn && model.CheckIn < r.CheckOut) ||
+                    (model.CheckOut > r.CheckIn && model.CheckOut <= r.CheckOut)
+            );
+            if (isIntersect)
+            {
+                Console.WriteLine(" intersect");
+                return null
+            ;
+            }
+            Console.WriteLine("not intersect");
             await db.Reservations.AddAsync(model);
             await db.SaveChangesAsync();
             return model;

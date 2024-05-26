@@ -7,8 +7,8 @@ namespace api.Dtos.Reservation
         public required DateTime CheckOut { get; set; }
         public required ReservationBookerDto Booker { get; set; }
         public required List<ReservationGuestDto> Guests { get; set; }
-        public required string? Wishes { get; set; }
-        public required bool IsPaid { get; set; }
+        public required string? Wishes { get; set; } = null;
+        public required bool IsPaid { get; set; } = false;
     }
 
     public class CreateReservationBookerDto
@@ -26,7 +26,7 @@ namespace api.Dtos.Reservation
         public required string Name { get; set; }
         public required string LastName { get; set; }
         public required string? MiddleName { get; set; }
-        public required bool IsChild { get; set; }
-        public required int? Age { get; set; }
+        public required bool IsChild { get; set; } = false;
+        public required int? Age { get; set; } = null;
     }
 }
