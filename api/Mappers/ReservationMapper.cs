@@ -12,6 +12,7 @@ namespace api.Mappers
             {
                 RoomId = reservation.RoomId,
                 Id = reservation.Id,
+                TotalPrice = reservation.TotalPrice,
                 CheckIn = reservation.CheckIn,
                 CheckOut = reservation.CheckOut,
                 Wishes = reservation.Wishes,
@@ -53,6 +54,7 @@ namespace api.Mappers
             var reservation = new Reservation
             {
                 RoomId = dto.RoomId,
+                TotalPrice = dto.TotalPrice,
                 CheckIn = dto.CheckIn,
                 CheckOut = dto.CheckOut,
                 Wishes = dto.Wishes,

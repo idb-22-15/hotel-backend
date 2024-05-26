@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations;
 using api.Dtos.Room;
 
 namespace api.Dtos.Reservation
@@ -7,6 +8,7 @@ namespace api.Dtos.Reservation
         public required int RoomId { get; set; }
         public RoomDto? Room { get; set; }
         public required int Id { get; set; }
+        public required decimal TotalPrice { get; set; }
         public required DateTime CheckIn { get; set; }
         public required DateTime CheckOut { get; set; }
         public required ReservationBookerDto Booker { get; set; }
@@ -19,18 +21,26 @@ namespace api.Dtos.Reservation
 
     {
         public required int Id { get; set; }
+        [MinLength(2)]
         public required string Name { get; set; }
+        [MinLength(2)]
         public required string LastName { get; set; }
+        [MinLength(2)]
         public required string? MiddleName { get; set; }
+        [EmailAddress()]
         public required string Email { get; set; }
+        [MinLength(2)]
         public required string Phone { get; set; }
     }
 
     public class ReservationGuestDto
     {
         public required int Id { get; set; }
+        [MinLength(2)]
         public required string Name { get; set; }
+        [MinLength(2)]
         public required string LastName { get; set; }
+        [MinLength(2)]
         public required string? MiddleName { get; set; }
         public required bool IsChild { get; set; }
         public required int? Age { get; set; }

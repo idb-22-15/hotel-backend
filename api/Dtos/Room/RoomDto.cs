@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations;
 using api.Dtos.BookedDateRange;
 using api.Dtos.Image;
 
@@ -8,7 +9,9 @@ namespace api.Dtos.Room
 
     {
         public required int Id { get; set; }
+        [MinLength(5)]
         public required string Title { get; set; }
+        [Range(1000, 100_000)]
         public required decimal Price { get; set; }
         public required RoomDtoConditions Conditions;
         public required List<BookedDateRangeDto> BookedDateRanges;
@@ -19,7 +22,9 @@ namespace api.Dtos.Room
 
     public class RoomDtoConditions
     {
+        [Range(1, 5)]
         public required int MaxGuests { get; set; }
+        [Range(10, 100)]
         public required decimal Square { get; set; }
         public required RoomDtoBeds Beds;
         public required RoomDtoOptions Options;

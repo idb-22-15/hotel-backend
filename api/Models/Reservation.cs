@@ -5,6 +5,7 @@ namespace api.Models
         public required int RoomId { get; set; }
         public Room? Room { get; set; }
         public int Id { get; set; }
+        public required decimal TotalPrice { get; set; }
         public required DateTime CheckIn { get; set; }
         public required DateTime CheckOut { get; set; }
         public required ReservationBooker Booker { get; set; }
