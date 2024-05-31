@@ -1,5 +1,5 @@
 obj
 bin
 /api/Env/Env.cs
-/api/db-shm
-/api/db-wal
+/api/db.db-shm
+/api/db.db-wal
