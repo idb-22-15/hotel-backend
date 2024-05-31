@@ -40,17 +40,10 @@ namespace api.Controllers
 
             var createdDto = created.ToDto();
             var jsonCreated = JsonConvert.SerializeObject(createdDto);
-            var createTable = (ReservationDto dto) =>
-            {
-                var tableStart = "<table>";
-                var rowStart = "<tr>";
-                var rowEnd = "<tr/>";
-                var tableEnd = "<table/>";
 
-            };
-            var emailMessage = "<strong>All information about booking:<string/> <br/>" + "<pre>" + jsonCreated + "<pre/>";
+            var emailMessage = "<strong>Информация о бронировании:<string/> <br/>" + "<pre>" + jsonCreated + "<pre/>";
 
-            await mailerRepo.SendEmailAsync(createdDto.Booker.Email, "Booking is accepted | Hotel Vatrigo", emailMessage);
+            await mailerRepo.SendEmailAsync(createdDto.Booker.Email, "Бронирование одобрено | Hotel Vatrigo", emailMessage);
 
             return CreatedAtAction(nameof(GetById), new { id = model.Id }, model.ToDto());
         }
@@ -59,6 +52,10 @@ namespace api.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete([FromRoute] int id)
         {
+            var model = await repo.GetByIdAsync(id);
+            if (model == null) return BadRequest();
+            await mailerRepo.SendEmailAsync(model.Booker.Email, "Бронирование отменено | Hotel Vatrigo", $"Здравствуйте, {model.Booker.LastName} {model.Booker.Name} {model.Booker.MiddleName}, ваша бронь была отменена");
+
             var deleted = await repo.DeleteAsync(id);
             if (deleted == null) return BadRequest();
             return NoContent();
