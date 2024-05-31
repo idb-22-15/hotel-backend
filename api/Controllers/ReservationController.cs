@@ -1,3 +1,4 @@
+using System.Collections;
 using api.Dtos.Reservation;
 using api.Interfaces;
 using api.Mappers;
@@ -39,6 +40,14 @@ namespace api.Controllers
 
             var createdDto = created.ToDto();
             var jsonCreated = JsonConvert.SerializeObject(createdDto);
+            var createTable = (ReservationDto dto) =>
+            {
+                var tableStart = "<table>";
+                var rowStart = "<tr>";
+                var rowEnd = "<tr/>";
+                var tableEnd = "<table/>";
+
+            };
             var emailMessage = "<strong>All information about booking:<string/> <br/>" + "<pre>" + jsonCreated + "<pre/>";
 
             await mailerRepo.SendEmailAsync(createdDto.Booker.Email, "Booking is accepted | Hotel Vatrigo", emailMessage);

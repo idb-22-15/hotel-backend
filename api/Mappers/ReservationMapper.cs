@@ -34,7 +34,8 @@ namespace api.Mappers
                     MiddleName = guest.MiddleName,
                     IsChild = guest.IsChild,
                     Age = guest.Age,
-                }).ToList()
+                }).ToList(),
+                Room = reservation.Room?.ToDto(),
             };
             return dto;
         }

@@ -14,12 +14,12 @@ namespace api.Repositories
 
         public async Task<Reservation?> GetByIdAsync(int id)
         {
-            return await db.Reservations.FirstOrDefaultAsync(r => r.Id == id);
+            return await db.Reservations.Include(r => r.Booker).FirstOrDefaultAsync(r => r.Id == id);
         }
 
         public async Task<List<Reservation>> GetByRoomIdAsync(int roomId)
         {
-            return await db.Reservations.Where(r => r.RoomId == roomId).ToListAsync();
+            return await db.Reservations.Include(r => r.Booker).Where(r => r.RoomId == roomId).ToListAsync();
         }
 
         public async Task<List<Reservation>> GetAllAsync()
